@@ -33,8 +33,8 @@ int main()
 		}
 	}
 
-	int seed = time(NULL);
-	srand(seed);
+	//int seed = time(NULL);
+	//srand(seed);
 	char winner;
 	inputCoordinates(board);
 	printBoard(board);
@@ -129,16 +129,12 @@ void calculateNextMove(char board[ROW_LENGTH][COLUMN_LENGTH]) {
 	//check horizontal
 	printf("Horizontal\n");
 	for (rowIndex = 0; rowIndex < ROW_LENGTH; rowIndex++) {
-		countPlayerO = 0;
 		countPlayerX = 0;
 		for (columnIndex = 0; columnIndex < COLUMN_LENGTH; columnIndex++) {
 			// if player counter reaches 2, find empty space in row
 				//make it return the empty space's index in that row
 			if (board[rowIndex][columnIndex] == playerX) {
 				countPlayerX++;
-			}
-			else if (board[rowIndex][columnIndex] == playerO) {
-				countPlayerO++;
 			}
 		}
 
@@ -147,6 +143,17 @@ void calculateNextMove(char board[ROW_LENGTH][COLUMN_LENGTH]) {
 			if (emptySpaceColumnIndex != -1){
 				board[rowIndex][emptySpaceColumnIndex] = playerX;
 				return;
+			}
+		}
+	}
+
+	for (rowIndex = 0; rowIndex < ROW_LENGTH; rowIndex++) {
+		countPlayerO = 0;
+		for (columnIndex = 0; columnIndex < COLUMN_LENGTH; columnIndex++) {
+			// if player counter reaches 2, find empty space in row
+			//make it return the empty space's index in that row
+			if (board[rowIndex][columnIndex] == playerO) {
+				countPlayerO++;
 			}
 		}
 
@@ -160,16 +167,12 @@ void calculateNextMove(char board[ROW_LENGTH][COLUMN_LENGTH]) {
 	}
 
 	printf("Vertical\n");
-	//vertical 
+	//vertical
 	for (columnIndex = 0; columnIndex < COLUMN_LENGTH; columnIndex++) {
-		countPlayerO = 0;
 		countPlayerX = 0;
 		for (rowIndex = 0; rowIndex < ROW_LENGTH; rowIndex++) {
 			if (board[rowIndex][columnIndex] == playerX) {
 				countPlayerX++;
-			}
-			else if (board[rowIndex][columnIndex] == playerO) {
-				countPlayerO++;
 			}
 		}
 		if (countPlayerX == COLUMN_LENGTH - 1) {
@@ -178,6 +181,15 @@ void calculateNextMove(char board[ROW_LENGTH][COLUMN_LENGTH]) {
 			if (emptySpaceRowIndex != -1) {
 				board[emptySpaceRowIndex][columnIndex] = playerX;
 				return;
+			}
+		}
+	}
+
+	for (columnIndex = 0; columnIndex < COLUMN_LENGTH; columnIndex++) {
+		countPlayerO = 0;
+		for (rowIndex = 0; rowIndex < ROW_LENGTH; rowIndex++) {
+			if (board[rowIndex][columnIndex] == playerO) {
+				countPlayerO++;
 			}
 		}
 
