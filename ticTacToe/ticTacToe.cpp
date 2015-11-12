@@ -22,10 +22,33 @@ char playerX = 'X';
 char playerO = 'O';
 char emptySpace = '.';
 
-Condition condition1(playerO, emptySpace, emptySpace, emptySpace, playerX, emptySpace, emptySpace, emptySpace, playerO, 0, 1);
+Condition condition1(playerO, emptySpace, emptySpace, 
+					 emptySpace, playerX, emptySpace, 
+					 emptySpace, emptySpace, playerO,
+					 0, 1);
+
+Condition condition2(playerO, emptySpace, emptySpace,
+					 emptySpace, playerO, emptySpace,
+					 emptySpace, emptySpace, playerX, 
+					 0, 2);
+
+Condition condition3(emptySpace, emptySpace, emptySpace,
+					 emptySpace, playerO, emptySpace,
+					 emptySpace, emptySpace, emptySpace,
+					 0, 0);
 
 int main()
 {
+	//char testBoard[ROW_LENGTH][COLUMN_LENGTH] = {
+	//	emptySpace, emptySpace, emptySpace,
+	//	emptySpace, playerO, emptySpace,
+	//	emptySpace, emptySpace, emptySpace
+	//};
+	//printBoard(testBoard);
+	//smarterComputerMove(testBoard);
+	//printBoard(testBoard);
+	//_getch();
+	//return 0;
 	char board[ROW_LENGTH][COLUMN_LENGTH];
 	for (int rowIndex = 0; rowIndex < ROW_LENGTH; rowIndex++) {
 		for (int columnIndex = 0; columnIndex < COLUMN_LENGTH; columnIndex++) {
@@ -33,8 +56,8 @@ int main()
 		}
 	}
 
-	//int seed = time(NULL);
-	//srand(seed);
+	int seed = time(NULL);
+	srand(seed);
 	char winner;
 	inputCoordinates(board);
 	printBoard(board);
@@ -120,12 +143,25 @@ void calculateNextMove(char board[ROW_LENGTH][COLUMN_LENGTH]) {
 	int emptySpaceRowIndex;
 	bool conditionResult;
 
-	// check condition
+	//check condition
 	conditionResult = condition1.compare(board);
 	if (conditionResult) {
 		printf("Condition is true\n");
 		return;
 	}
+
+	conditionResult = condition2.compare(board);
+	if (conditionResult) {
+		printf("Condition is true\n");
+		return;
+	}
+
+	conditionResult = condition3.compare(board);
+	if (conditionResult) {
+		printf("Condition is true\n");
+		return;
+	}
+
 	//check horizontal
 	printf("Horizontal\n");
 	for (rowIndex = 0; rowIndex < ROW_LENGTH; rowIndex++) {
